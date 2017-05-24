@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Leaflet Starter - Geometries Simple</title>
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css">
+    <style type="text/css">
+    html,
+    body {
+        height: 100%;
+    }
+    
+    #map {
+        height: 95%;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+    <script type="text/javascript">
+    var map = L.map('map').setView([39.096106, -108.722866], 15);
+
+    var Stamen_Terrain = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.{ext}', {
+        attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        subdomains: 'abcd',
+        minZoom: 0,
+        maxZoom: 18,
+        ext: 'png'
+    }).addTo(map);
+
+    var marker = L.marker([39.096106, -108.722866]).addTo(map);
+    marker.bindPopup("This is Otto's Route!").openPopup();
+
+    var circle = L.circle([39.098453, -108.715289], {
+        color: 'red',
+        fillColor: '#f03',
+        fillOpacity: 0.5,
+        radius: 250 // radius of circle in meters
+    }).addTo(map).bindPopup("Bighorn sheep somewhere around here.");
+
+    var polygon = L.polygon([
+        [39.09906, -108.73542],
+        [39.09846, -108.73735],
+        [39.09779, -108.7383],
+        [39.09676, -108.73834],
+        [39.0957, -108.73933],
+        [39.0952, -108.73954],
+        [39.09466, -108.73843],
+        [39.09466, -108.738],
+        [39.09523, -108.7371],
+        [39.09543, -108.73602],
+        [39.0957, -108.73521],
+        [39.09616, -108.73418],
+        [39.0964, -108.73336]
+    ]).addTo(map).bindPopup("Rockfall hazards!");
+
+
+    var myCoords = [];
+    map.on('click', function(evt) {
+        myCoords.push([evt.latlng.lat, evt.latlng.lng]);
+        console.log(myCoords);
+    });
+    </script>
+</body>
+
+</html>
